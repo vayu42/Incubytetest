@@ -7,27 +7,35 @@ import java.io.*;
 /* Name of the class has to be "Main" only if the class is public. */
 class StringCalculator
 {
-    private String str;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     
-    public String getString() {  
-         return name;  
-        }
-        
-    public void setString(String str) {  
-         this.str = str;  
+    public Boolean checkNumber(String str) throws Exception     {
+         for (int i = 0; i < str.length(); i++)
+                if (Character.isDigit(str.charAt(i)) == false)
+                         return false;
+        return true;
+    }
+        public static String getString() throws Exception  {
+                String str = br.readLine();
+                return str;
         }
         
     public int Add(String str) throws Exception    {
-        int  a =0,b=0,sum=0;
-        if(str.length()==0)
-            System.out.println(0);
-        else{
-            
-        }
+        int  sum=0;
+            String[] strarr = str.split(" ");
+                for(int i = 0;i<strarr.length;i++)    {
+                        if(checkNumber(strarr[i]))
+                                sum+=Integer.parseInt(strarr[i]);
+                        else
+                                break;
+                        }
+               return sum;
     }
-	public static void main (String[] args) throws java.lang.Exception
-	{
-	    
-	}
+        public static void main (String[] args) throws java.lang.Exception
+        {
+            StringCalculator obj = new StringCalculator();
+            String s = getString();
+            if(s!=null)
+            System.out.println(obj.Add(s));
+        }
 }
-
