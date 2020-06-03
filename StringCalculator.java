@@ -22,7 +22,7 @@ class StringCalculator
         
     public int Add(String str) throws Exception    {
         int  sum=0;
-            String[] strarr = str.split(" ");
+            String[] strarr = str.split("[\\s|.|*|#|@|]");
                 for(int i = 0;i<strarr.length;i++)    {
                         if(checkNumber(strarr[i]))
                                 sum+=Integer.parseInt(strarr[i]);
