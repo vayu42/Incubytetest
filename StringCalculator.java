@@ -8,34 +8,35 @@ import java.io.*;
 class StringCalculator
 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    
-    public Boolean checkNumber(String str) throws Exception     {
-         for (int i = 0; i < str.length(); i++)
-                if (Character.isDigit(str.charAt(i)) == false)
-                         return false;
-        return true;
+ 
+    public static String getString() throws Exception  {
+            String str = br.readLine();
+            return str;
     }
-        public static String getString() throws Exception  {
-                String str = br.readLine();
-                return str;
-        }
         
     public int Add(String str) throws Exception    {
-        int  sum=0;
-            String[] strarr = str.split("[\\s|.|*|#|@|]");
-                for(int i = 0;i<strarr.length;i++)    {
-                        if(checkNumber(strarr[i]))
-                                sum+=Integer.parseInt(strarr[i]);
-                        else
-                                break;
+        int  sum=0,cntr=0,i=0;
+                for(i = 0;i<str.length();i++)    {
+                        if(Character.isDigit(str.charAt(i)) == true)  
+                                cntr++;
+                        else if((Character.isDigit(str.charAt(i-1)) == true) && ((Character.isDigit(str.charAt(i)) == false))) {
+                            String strarr = str.substring(i-cntr,i);
+                            sum+=Integer.parseInt(strarr);
+                            cntr = 0;
                         }
+                }
+                        if(cntr!=0) {
+                            String strarr = str.substring(i-cntr,i);
+                            sum+=Integer.parseInt(strarr);
+                            }
                return sum;
     }
-        public static void main (String[] args) throws java.lang.Exception
-        {
-            StringCalculator obj = new StringCalculator();
-            String s = getString();
-            if(s!=null)
-            System.out.println(obj.Add(s));
-        }
+
+    public static void main (String[] args) throws java.lang.Exception
+    {
+        StringCalculator obj = new StringCalculator();
+        String s = getString();
+        if(s!=null)
+        System.out.println(obj.Add(s));
+    }
 }
