@@ -16,7 +16,7 @@ class StringCalculator
         
     public int Add(String str) throws Exception    {
         int  sum=0,cntr=0,i=0;
-                for(i = 0;i<str.length();i++)    {
+                for(i = 1;i<str.length();i++)    {
                         if(Character.isDigit(str.charAt(i)) == true)  
                                 cntr++;
                         else if((Character.isDigit(str.charAt(i-1)) == true) && ((Character.isDigit(str.charAt(i)) == false))) {
@@ -24,6 +24,8 @@ class StringCalculator
                             sum+=Integer.parseInt(strarr);
                             cntr = 0;
                         }
+			else if((Character.isDigit(str.charAt(i-1)) != true) && ((Character.isDigit(str.charAt(i)) != false))) 
+                            cntr++;
                 }
                         if(cntr!=0) {
                             String strarr = str.substring(i-cntr,i);
