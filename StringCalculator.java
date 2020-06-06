@@ -12,6 +12,23 @@ class StringCalculator
             return str;
     }
 
+     public String removeNegative(String str) throws Exception {
+        StringBuilder builder = new StringBuilder();
+        for(int i=0;i<str.length();i++) {
+            if(str.charAt(i)=='-')   {
+                int cntr = 0;
+               while(i+1<str.length() && Character.isDigit(str.charAt(i+1))==true)  {
+                   i++;
+                   cntr++;
+               }
+
+            }
+            else
+                builder.append(str.charAt(i));
+        }
+        return builder.toString();
+    }
+
     public int Add(String str) throws Exception    {
         int  sum=0,cntr=0,i=0;
                 if(Character.isDigit(str.charAt(i)) != true)  {
@@ -51,8 +68,11 @@ class StringCalculator
     {
         StringCalculator obj = new StringCalculator();
         String s = getString();
-        if(s!=null)
-        System.out.println(obj.Add(s));
+        if(s!=null)	{
+	String s1 = obj.removeNegative(s);
+        System.out.println(obj.Add(s1));
+	}
+
     }
 }
 
