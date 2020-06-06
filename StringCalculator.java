@@ -6,7 +6,12 @@ import java.io.*;
 class StringCalculator
 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+    
+    class MyException extends Exception {
+        public String MyException()    { 
+	       return ("Negatives not allowed") ;
+    }
+}
     public static String getString() throws Exception  {
             String str = br.readLine();
             return str;
@@ -21,7 +26,6 @@ class StringCalculator
                    i++;
                    cntr++;
                }
-
             }
             else
                 builder.append(str.charAt(i));
@@ -37,8 +41,8 @@ class StringCalculator
                         if(Character.isDigit(str.charAt(i)) == true)
                                 cntr++;
                         else if((Character.isDigit(str.charAt(i-1)) == true) && ((Character.isDigit(str.charAt(i)) == false))) {
-                            String strarr = str.substring(i-cntr,i);
-                            sum+=Integer.parseInt(strarr);
+                            if(Integer.parseInt(str.substring(i-cntr,i))<1000)
+                            sum+=Integer.parseInt(str.substring(i-cntr,i));
                             cntr = 0;
                         }
                         else if((Character.isDigit(str.charAt(i-1)) != true) && ((Character.isDigit(str.charAt(i)) != false)))
@@ -51,8 +55,8 @@ class StringCalculator
                         if(Character.isDigit(str.charAt(i)) == true)
                             cntr++;
                         else if((Character.isDigit(str.charAt(i-1)) == true) && ((Character.isDigit(str.charAt(i)) == false))) {
-                            String strarr = str.substring(i-cntr,i);
-                            sum+=Integer.parseInt(strarr);
+                            if(Integer.parseInt(str.substring(i-cntr,i))<1000)
+                            sum+=Integer.parseInt(str.substring(i-cntr,i));
                             cntr = 0;
                         }
                     }
@@ -75,4 +79,3 @@ class StringCalculator
 
     }
 }
-
