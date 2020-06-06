@@ -62,8 +62,8 @@ class StringCalculator
                     }
                 }
                         if(cntr!=0) {
-                            String strarr = str.substring(i-cntr,i);
-                            sum+=Integer.parseInt(strarr);
+                            if(Integer.parseInt(str.substring(i-cntr,i))<1000)
+                            sum+=Integer.parseInt(str.substring(i-cntr,i));
                             }
                return sum;
     }
