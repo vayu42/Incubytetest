@@ -35,8 +35,8 @@ class StringCalculator
 
     public int Add(String str) throws Exception    {
         int  sum=0,cntr=0,i=0;
+        if(str.length()>0)  {
                 if(Character.isDigit(str.charAt(i)) != true)  {
-                    
                 for(i = 1;i<str.length();i++)    {
                         if(Character.isDigit(str.charAt(i)) == true)
                                 cntr++;
@@ -61,6 +61,7 @@ class StringCalculator
                         }
                     }
                 }
+        }
                         if(cntr!=0) {
                             if(Integer.parseInt(str.substring(i-cntr,i))<1000)
                             sum+=Integer.parseInt(str.substring(i-cntr,i));
@@ -73,8 +74,7 @@ class StringCalculator
         StringCalculator obj = new StringCalculator();
         String s = getString();
         if(s!=null)	{
-	String s1 = obj.removeNegative(s);
-        System.out.println(obj.Add(s1));
+        System.out.println(obj.Add(obj.removeNegative(s)));
 	}
 
     }
