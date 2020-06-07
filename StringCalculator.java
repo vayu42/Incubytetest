@@ -7,24 +7,26 @@ class StringCalculator
 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     
-    class MyException extends Exception {
-        public String MyException()    { 
-	       return ("Negatives not allowed") ;
-    }
-}
     public static String getString() throws Exception  {
             String str = br.readLine();
             return str;
     }
 
      public String removeNegative(String str) throws Exception {
+         Boolean flag = false;
         StringBuilder builder = new StringBuilder();
         for(int i=0;i<str.length();i++) {
             if(str.charAt(i)=='-')   {
                 int cntr = 0;
+                if(i+1<str.length() && Character.isDigit(str.charAt(i+1))==true)
+                         flag = true;
                while(i+1<str.length() && Character.isDigit(str.charAt(i+1))==true)  {
                    i++;
                    cntr++;
+               }
+               if(flag) {
+		       flag=false;
+                   throw new MyException("Negatives not allowed"+" "+str.substring(i-cntr,i+1)+" "+"is in input");
                }
             }
             else
@@ -77,5 +79,11 @@ class StringCalculator
         System.out.println(obj.Add(obj.removeNegative(s)));
 	}
 
+    }
+}
+
+class MyException extends Exception {
+        public MyException(String str)    { 
+	       super(str) ;
     }
 }
