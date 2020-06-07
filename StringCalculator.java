@@ -13,24 +13,30 @@ class StringCalculator
     }
 
      public String removeNegative(String str) throws Exception {
-         Boolean flag = false;
+         Boolean flag = false,check=false;
+         StringJoiner err = new StringJoiner(" ");
         StringBuilder builder = new StringBuilder();
         for(int i=0;i<str.length();i++) {
             if(str.charAt(i)=='-')   {
                 int cntr = 0;
-                if(i+1<str.length() && Character.isDigit(str.charAt(i+1))==true)
+                if(i+1<str.length() && Character.isDigit(str.charAt(i+1))==true)    {
                          flag = true;
+                         check = true;
+                }
                while(i+1<str.length() && Character.isDigit(str.charAt(i+1))==true)  {
                    i++;
                    cntr++;
                }
                if(flag) {
-		       flag=false;
-                   throw new MyException("Negatives not allowed"+" "+str.substring(i-cntr,i+1)+" "+"is in input");
+                        err.add(str.substring(i-cntr,i+1));
+                        flag = false;
                }
             }
             else
                 builder.append(str.charAt(i));
+                
+                if(i==str.length()-1 &&check)
+                         throw new MyException("Negatives not allowed "+err.toString()+" is/are present in String");
         }
         return builder.toString();
     }
